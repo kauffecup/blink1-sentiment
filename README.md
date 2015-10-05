@@ -4,6 +4,8 @@ A little project that hooks up a [blink(1)](https://blink1.thingm.com/) to
 IBM Watson's [Tone Analyzer](https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/tone-analyzer.html)
 in order to visualize the sentiment of Slack channels in real time.
 
+Read my blog post on it [here](http://www.jkaufman.io/ambient-sentiment/).
+
 Of course, this doesn't have to be hooked up to Slack, but can be applied to any
 real time stream of text. It might be very interesting to see a visualization in
 real time of a Twitter feed, or the comments on a blog, or maybe even the
