@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "main": "app.js",
   "dependencies": {
-    "audiodata": "^1.1.0",
     "babel": "^5.8.23",
     "bluebird": "^2.10.1",
     "node-blink1": "^0.2.1",
