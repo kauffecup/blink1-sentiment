@@ -1,3 +1,4 @@
 node_modules
 *.log
 VCAP_SERVICES.json
+SLACK_TOKEN.txt

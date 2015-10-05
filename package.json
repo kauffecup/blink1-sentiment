@@ -7,6 +7,7 @@
     "babel": "^5.8.23",
     "bluebird": "^2.10.1",
     "node-blink1": "^0.2.1",
+    "slack-client": "^1.4.1",
     "watson-developer-cloud": "^0.10.4"
   },
   "devDependencies": {},

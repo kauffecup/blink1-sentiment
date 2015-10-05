@@ -1,9 +1,15 @@
-import Blink1     from 'node-blink1';
-import Promise    from 'bluebird';
-// import microphone from 'microphone';
-import watson     from 'watson-developer-cloud';
-import toneAsync  from './toneAsync';
+import Blink1    from 'node-blink1';
+import Promise   from 'bluebird';
+import toneAsync from './toneAsync';
+import Slack     from 'slack-client';
+import fs        from 'fs';
 
+// the token we'll use to authenticate w/ slack
+const SLACK_TOKEN = process.env.SLACK_TOKEN || fs.readFileSync('./SLACK_TOKEN.txt', 'utf8');
+// Automatically reconnect after an error response from Slack
+const AUTO_RECCONECT = true;
+// Automatically mark each message as read after it is processed
+const AUTO_MARK = true;
 // the time it takes to fade da blinker's colorz
 const FADE_TIME = 1000;
 
@@ -11,6 +17,20 @@ const FADE_TIME = 1000;
 var blink = Promise.promisifyAll(new Blink1());
 blink.off();
 blink.setRGB(0, 0, 0);
+
+// initialize slack
+var slack = new Slack(SLACK_TOKEN, AUTO_RECCONECT, AUTO_MARK);
+slack.on('open', () => {
+  console.log(`Connected to ${slack.team.name} as @${slack.self.name}`);
+});
+slack.on('message', ({text}) => {
+  console.log(`analyzing "${text}" ...`);
+  textToColor(text);
+});
+slack.on('error', e => {
+  console.error(e);
+});
+slack.login();
 
 // go off to watson with some text and then set da blinkers color to it, nah mean?
 function textToColor(text) {
